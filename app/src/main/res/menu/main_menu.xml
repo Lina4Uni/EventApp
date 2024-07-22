@@ -1,0 +1,17 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    <item
+        android:id="@+id/menu_event_management"
+        android:title="Eventverwaltung"/>
+    <item
+        android:id="@+id/menu_participant_management"
+        android:title="Teilnehmerverwaltung"/>
+    <item
+        android:id="@+id/menu_schedule_creation"
+        android:title="Zeitplanerstellung"/>
+    <item
+        android:id="@+id/menu_invitations"
+        android:title="Einladungen"/>
+    <item
+        android:id="@+id/menu_reminders"
+        android:title="Erinnerungen"/>
+</menu>
