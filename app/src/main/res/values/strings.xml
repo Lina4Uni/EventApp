@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">EventPlusApp</string>
+    <string name="navigation_drawer_open">Öffnen</string>
+    <string name="navigation_drawer_close">Schließen</string>
 </resources>
