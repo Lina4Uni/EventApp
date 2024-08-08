@@ -2,23 +2,24 @@ package com.example.eventplusapp.java;
 
 
 public class Event {
-    private String name;
+    private String eventName;
     private String description;
     private String date;
-
+    private String location;
+    private String participants;
     public Event(String name, String description, String date) {
-        this.name = name;
+        this.eventName = name;
         this.description = description;
         this.date = date;
     }
 
     // Getter und Setter
     public String getName() {
-        return name;
+        return eventName;
     }
 
     public void setName(String name) {
-        this.name = name;
+        this.eventName = name;
     }
 
     public String getDescription() {

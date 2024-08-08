@@ -1,0 +1,43 @@
+<!-- File: res/layout/nav_header.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="vertical"
+    android:padding="16dp"
+    android:background="@color/purple_200">
+
+    <TextView
+        android:id="@+id/header_text"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        android:text="Kein Profil" />
+
+    <TextView
+        android:id="@+id/login_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:layout_marginTop="16dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="Anmelden"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/register_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="Registrieren"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:textStyle="bold" />
+</LinearLayout>

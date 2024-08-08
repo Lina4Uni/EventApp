@@ -1,17 +1,33 @@
+<!-- File: res/menu/main_menu.xml -->
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item
+        android:id="@+id/menu_event_home"
+        android:icon="@drawable/ic_event_home"
+        android:title="@string/event_home"
+        android:iconTint="@color/purple_200"/>
+    <item
         android:id="@+id/menu_event_management"
-        android:title="@string/event_management"/>
+        android:icon="@drawable/ic_event_management"
+        android:title="@string/event_management"
+        android:iconTint="@color/purple_200"/>
     <item
         android:id="@+id/menu_participant_management"
-        android:title="@string/participant_management"/>
+        android:icon="@drawable/ic_participant_management"
+        android:title="@string/participant_management"
+        android:iconTint="@color/purple_200"/>
     <item
         android:id="@+id/menu_schedule_creation"
-        android:title="@string/schedule_creation"/>
+        android:icon="@drawable/ic_schedule_creation"
+        android:title="@string/schedule_creation"
+        android:iconTint="@color/purple_200"/>
     <item
         android:id="@+id/menu_invitations"
-        android:title="@string/invitations"/>
+        android:icon="@drawable/ic_invitations"
+        android:title="@string/invitations"
+        android:iconTint="@color/purple_200"/>
     <item
         android:id="@+id/menu_reminders"
-        android:title="@string/reminders"/>
+        android:icon="@drawable/ic_reminders"
+        android:title="@string/reminders"
+        android:iconTint="@color/purple_200"/>
 </menu>

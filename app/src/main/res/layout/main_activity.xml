@@ -1,3 +1,4 @@
+<!-- File: res/layout/main_activity.xml -->
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
@@ -16,11 +17,126 @@
             android:background="@color/purple_200"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
-        <!-- Hauptinhalt hier -->
-        <FrameLayout
-            android:id="@+id/content_frame"
+        <GridLayout
+            android:id="@+id/grid_layout"
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:columnCount="1"
+            android:orientation="horizontal"
+            android:padding="16dp"
+            android:rowCount="3">
+
+            <!-- Tile for Event Management -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_purple_border"
+                android:clickable="true"
+                android:onClick="onTileClick"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:tag="menu_event_management">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/event_management"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <!-- Tile for Participant Management -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_purple_border"
+                android:clickable="true"
+                android:onClick="onTileClick"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:tag="menu_participant_management">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/participant_management"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <!-- Tile for Schedule Creation -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_purple_border"
+                android:clickable="true"
+                android:onClick="onTileClick"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:tag="menu_schedule_creation">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/schedule_creation"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <!-- Tile for Invitations -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_purple_border"
+                android:clickable="true"
+                android:onClick="onTileClick"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:tag="menu_invitations">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/invitations"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+            <!-- Tile for Reminders -->
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_rowWeight="1"
+                android:layout_columnWeight="1"
+                android:layout_margin="8dp"
+                android:background="@drawable/rounded_purple_border"
+                android:clickable="true"
+                android:onClick="onTileClick"
+                android:orientation="vertical"
+                android:padding="16dp"
+                android:tag="menu_reminders">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:text="@string/reminders"
+                    android:textColor="@color/black" />
+            </LinearLayout>
+
+        </GridLayout>
 
     </LinearLayout>
 
