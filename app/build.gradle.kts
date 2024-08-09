@@ -62,6 +62,8 @@ dependencies {
     implementation(libs.androidx.appcompat)
     implementation(libs.androidx.appcompat)
     implementation("com.google.android.material:material:1.6.1")
+    implementation("com.google.android.material:material:1.6.1")
+    implementation("androidx.sqlite:sqlite:2.1.0")
     implementation(libs.androidx.drawerlayout)
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
