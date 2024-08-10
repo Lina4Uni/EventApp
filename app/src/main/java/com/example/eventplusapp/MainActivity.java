@@ -2,14 +2,17 @@
 package com.example.eventplusapp;
 
 import android.content.Intent;
+import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
+import android.util.Log;
 import android.view.View;
 import android.widget.TextView;
 import androidx.appcompat.widget.Toolbar;
 
+import com.example.eventplusapp.java.DatabaseHelper;
 import com.example.eventplusapp.java.EventManagementActivity;
 import com.example.eventplusapp.java.InvitationsActivity;
 import com.example.eventplusapp.java.ParticipantManagementActivity;
@@ -20,13 +23,19 @@ import com.google.android.material.navigation.NavigationView;
 public class MainActivity extends BaseActivity {
 
     public static boolean isLoggedIn = false;
-    public static String firstName = "John";
-    public static String lastName = "Doe";
+    public static String firstName = "";
+    public static String lastName = "";
+    private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+
+        // Initialize DatabaseHelper
+        dbHelper = new DatabaseHelper(this);
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+        Log.d("MainActivity", "Database created/opened");
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -48,10 +57,21 @@ public class MainActivity extends BaseActivity {
         underlineTextView(registerText);
         underlineTextView(logoutText);
 
-        loginText.setOnClickListener(v -> setContentView(R.layout.activity_login));
-        registerText.setOnClickListener(v -> setContentView(R.layout.activity_register));
+        loginText.setOnClickListener(v ->  {
+            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
+        registerText.setOnClickListener(v -> {
+            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
 
         if (isLoggedIn) {
+            Intent intent = getIntent();
+            firstName = intent.getStringExtra("firstName");
+            lastName = intent.getStringExtra("lastName");
+
             headerText.setText("Hallo " + firstName + " " + lastName);
             loginText.setVisibility(View.GONE);
             registerText.setVisibility(View.GONE);

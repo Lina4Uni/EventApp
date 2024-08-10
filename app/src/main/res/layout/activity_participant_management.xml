@@ -19,8 +19,14 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <!-- Hauptinhalt hier -->
-        <FrameLayout
-            android:id="@+id/content_frame"
+        <Spinner
+            android:id="@+id/spinner_events"
+            android:layout_width="match_parent"
+            android:layout_height="48dp"
+            android:layout_marginBottom="16dp" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/recycler_view_participants"
             android:layout_width="match_parent"
             android:layout_height="match_parent" />
 

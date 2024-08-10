@@ -26,6 +26,7 @@ public final class DatabaseContract {
 
     public static class UserEventEntry implements BaseColumns {
         public static final String TABLE_NAME = "UserEvent";
+        public static final String COLUMN_User_Event_ID = "UserEvent_Id";
         public static final String COLUMN_USER_EVENT_USER_ID = "User_Id";
         public static final String COLUMN_USER_EVENT_EVENT_ID = "Event_Id";
     }

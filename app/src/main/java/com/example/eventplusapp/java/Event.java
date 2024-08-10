@@ -1,6 +1,8 @@
 // File: app/src/main/java/com/example/eventplusapp/java/Event.java
 package com.example.eventplusapp.java;
 
+import android.widget.ArrayAdapter;
+
 import java.util.List;
 
 public class Event {
@@ -63,4 +65,9 @@ public class Event {
     public void setParticipants(List<User> participants) {
         this.participants = participants;
     }
+    @Override
+    public String toString() {
+        return eventName;
+    }
+
 }

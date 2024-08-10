@@ -38,6 +38,7 @@ public class RegisterActivity extends AppCompatActivity {
                 String password = passwordEditText.getText().toString();
 
                 userDatabaseOperations.insertUser(firstName, lastName, email, password);
+                MainActivity.isLoggedIn = true;
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 intent.putExtra("firstName", firstName);
                 intent.putExtra("lastName", lastName);
