@@ -1,6 +1,7 @@
 // File: app/src/main/java/com/example/eventplusapp/RegisterActivity.java
 package com.example.eventplusapp;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -9,16 +10,18 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.eventplusapp.java.UserDatabaseOperations;
+
 public class RegisterActivity extends AppCompatActivity {
 
-    private com.example.eventplusapp.java.DatabaseHelper databaseHelper;
+    private UserDatabaseOperations userDatabaseOperations;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_register);
 
-        databaseHelper = new com.example.eventplusapp.java.DatabaseHelper(this);
+        userDatabaseOperations = new UserDatabaseOperations(this);
 
         Button registerButton = findViewById(R.id.register_button);
         registerButton.setOnClickListener(new View.OnClickListener() {
@@ -34,8 +37,12 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                databaseHelper.insertUser(firstName, lastName, email, password);
-                Toast.makeText(RegisterActivity.this, "Du bist registriert", Toast.LENGTH_SHORT).show();
+                userDatabaseOperations.insertUser(firstName, lastName, email, password);
+                Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
+                intent.putExtra("firstName", firstName);
+                intent.putExtra("lastName", lastName);
+                startActivity(intent);
+                finish();
             }
         });
     }

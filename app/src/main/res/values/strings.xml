@@ -2,10 +2,13 @@
     <string name="app_name">EventPlusApp</string>
     <string name="navigation_drawer_open">Öffnen</string>
     <string name="navigation_drawer_close">Schließen</string>
+    <string name="edit_event">Event bearbeiten</string>
+    <string name="add_event">Event hinzufügen</string>
     <string name="event_home">Startseite</string>
     <string name="event_management">Veranstaltungsverwaltung</string>
     <string name="participant_management">Teilnehmerverwaltung</string>
     <string name="schedule_creation">Terminerstellung</string>
     <string name="invitations">Einladungen</string>
     <string name="reminders">Erinnerungen</string>
+    <string name="no_events">Keine Veranstalltungen</string>
 </resources>

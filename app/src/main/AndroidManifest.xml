@@ -13,6 +13,8 @@
 
         <activity android:name=".LoginActivity" />
         <activity android:name=".RegisterActivity" />
+        <activity android:name="com.example.eventplusapp.java.EventManagementActivity" />
+        <activity android:name="com.example.eventplusapp.java.AddEventActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

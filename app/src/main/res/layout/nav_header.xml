@@ -40,4 +40,18 @@
         android:focusable="true"
         android:padding="8dp"
         android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/logout_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:minHeight="48dp"
+        android:textColor="@android:color/white"
+        android:textSize="14sp"
+        android:text="Logout"
+        android:clickable="true"
+        android:focusable="true"
+        android:padding="8dp"
+        android:textStyle="bold"
+        android:visibility="gone" />
 </LinearLayout>

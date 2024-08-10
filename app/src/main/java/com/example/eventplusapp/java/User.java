@@ -1,25 +1,28 @@
+// File: app/src/main/java/com/example/eventplusapp/java/User.java
 package com.example.eventplusapp.java;
 
 public class User {
 
-    int personId;
-    String vorname;
-    String nachname;
-    String passwort;
+    private int userId;
+    private String vorname;
+    private String nachname;
+    private String mail;
+    private String passwort;
 
-    public User(int personId, String vorname, String nachname, String passwort) {
-        this.personId = personId;
+    public User(int userId, String vorname, String nachname, String mail, String passwort) {
+        this.userId = userId;
         this.vorname = vorname;
         this.nachname = nachname;
+        this.mail = mail;
         this.passwort = passwort;
     }
 
-    public int getPersonId() {
-        return personId;
+    public int getUserId() {
+        return userId;
     }
 
-    public void setPersonId(int personId) {
-        this.personId = personId;
+    public void setUserId(int userId) {
+        this.userId = userId;
     }
 
     public String getVorname() {
@@ -38,6 +41,14 @@ public class User {
         this.nachname = nachname;
     }
 
+    public String getMail() {
+        return mail;
+    }
+
+    public void setMail(String mail) {
+        this.mail = mail;
+    }
+
     public String getPasswort() {
         return passwort;
     }
@@ -45,5 +56,4 @@ public class User {
     public void setPasswort(String passwort) {
         this.passwort = passwort;
     }
-
 }

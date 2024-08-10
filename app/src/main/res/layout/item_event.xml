@@ -1,0 +1,23 @@
+<!-- File: res/layout/item_event.xml -->
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:padding="16dp"
+    android:background="?attr/selectableItemBackground">
+
+    <TextView
+        android:id="@+id/text_view_event_name"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:text="Event Name"
+        android:textSize="16sp" />
+
+    <ImageView
+        android:id="@+id/image_view_edit"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:contentDescription="@string/edit_event"
+        android:src="@android:drawable/ic_menu_edit" />
+</LinearLayout>

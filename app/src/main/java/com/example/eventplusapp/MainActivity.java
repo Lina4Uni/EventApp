@@ -16,14 +16,16 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
+
+import com.example.eventplusapp.java.EventManagementActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends AppCompatActivity {
 
     private DrawerLayout drawer;
-    private boolean isLoggedIn = false; // This should be replaced with actual login state
-    private String firstName = "John"; // Replace with actual user data
-    private String lastName = "Doe"; // Replace with actual user data
+    public static boolean isLoggedIn = false; // This should be replaced with actual login state
+    public static String firstName = ""; // Replace with actual user data
+    public static String lastName = ""; // Replace with actual user data
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -46,23 +48,48 @@ public class MainActivity extends AppCompatActivity {
         TextView headerText = headerView.findViewById(R.id.header_text);
         TextView loginText = headerView.findViewById(R.id.login_text);
         TextView registerText = headerView.findViewById(R.id.register_text);
+        TextView logoutText = headerView.findViewById(R.id.logout_text);
 
         // Underline the text programmatically
         underlineTextView(loginText);
         underlineTextView(registerText);
+        underlineTextView(logoutText);
 
         loginText.setOnClickListener(v -> {
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
         });
         registerText.setOnClickListener(v -> {
-                startActivity(new Intent(MainActivity.this, RegisterActivity.class));
+            startActivity(new Intent(MainActivity.this, RegisterActivity.class));
         });
+
+        Intent intent = getIntent();
+        String newFirstName = intent.getStringExtra("firstName");
+        String newLastName = intent.getStringExtra("lastName");
+
+        if (newFirstName != null && newLastName != null) {
+            firstName = newFirstName;
+            lastName = newLastName;
+            isLoggedIn = true;
+        }
 
         if (isLoggedIn) {
             headerText.setText(firstName + " " + lastName);
+            loginText.setVisibility(View.GONE);
+            registerText.setVisibility(View.GONE);
+            logoutText.setVisibility(View.VISIBLE);
         } else {
             headerText.setText("Kein Profil");
+            logoutText.setVisibility(View.GONE);
         }
+
+        logoutText.setOnClickListener(v -> {
+            // Handle logout action
+            isLoggedIn = false;
+            headerText.setText("Kein Profil");
+            loginText.setVisibility(View.VISIBLE);
+            registerText.setVisibility(View.VISIBLE);
+            logoutText.setVisibility(View.GONE);
+        });
     }
 
     private void underlineTextView(TextView textView) {
@@ -77,7 +104,8 @@ public class MainActivity extends AppCompatActivity {
 
         switch (tag) {
             case "menu_event_management":
-                layoutId = R.layout.activity_event_management;
+                Intent intent = new Intent(MainActivity.this, EventManagementActivity.class);
+                startActivity(intent);
                 break;
             case "menu_participant_management":
                 layoutId = R.layout.activity_participant_management;
@@ -93,7 +121,9 @@ public class MainActivity extends AppCompatActivity {
                 break;
         }
 
-        changeView(layoutId);
+        if (!tag.equals("menu_event_management")) {
+            changeView(layoutId);
+        }
     }
 
     public boolean changeView(int view) {
@@ -108,16 +138,23 @@ public class MainActivity extends AppCompatActivity {
         toggle.syncState();
 
         NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(item -> onOptionsItemSelected(item));
-
+        try {
+            navigationView.setNavigationItemSelectedListener(item -> onOptionsItemSelected(item));
+        }
+        catch (Exception e) {
+            Toast.makeText(this, "Error: " + e.getMessage(), Toast.LENGTH_SHORT).show();
+        }
         // Inflate the header view
         View headerView = navigationView.inflateHeaderView(R.layout.nav_header);
         TextView headerText = headerView.findViewById(R.id.header_text);
         TextView loginText = headerView.findViewById(R.id.login_text);
         TextView registerText = headerView.findViewById(R.id.register_text);
+        TextView logoutText = headerView.findViewById(R.id.logout_text);
+
         // Underline the text programmatically
         underlineTextView(loginText);
         underlineTextView(registerText);
+        underlineTextView(logoutText);
 
         loginText.setOnClickListener(v -> {
             setContentView(R.layout.activity_login);
@@ -125,10 +162,23 @@ public class MainActivity extends AppCompatActivity {
         registerText.setOnClickListener(v -> setContentView(R.layout.activity_register));
 
         if (isLoggedIn) {
-            headerText.setText(firstName + " " + lastName);
+            headerText.setText("Hallo " + firstName + " " + lastName);
+            loginText.setVisibility(View.GONE);
+            registerText.setVisibility(View.GONE);
+            logoutText.setVisibility(View.VISIBLE);
         } else {
             headerText.setText("Kein Profil");
+            logoutText.setVisibility(View.GONE);
         }
+
+        logoutText.setOnClickListener(v -> {
+            // Handle logout action
+            isLoggedIn = false;
+            headerText.setText("Kein Profil");
+            loginText.setVisibility(View.VISIBLE);
+            registerText.setVisibility(View.VISIBLE);
+            logoutText.setVisibility(View.GONE);
+        });
 
         return true;
     }
