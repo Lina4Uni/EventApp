@@ -1,12 +1,14 @@
 // File: app/src/main/java/com/example/eventplusapp/java/AddEventActivity.java
 package com.example.eventplusapp.java;
 
+import static com.example.eventplusapp.java.EventManagementActivity.eventAdapter;
+import static com.example.eventplusapp.java.EventManagementActivity.eventList;
+
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 import com.example.eventplusapp.R;
 
@@ -17,6 +19,7 @@ public class AddEventActivity extends AppCompatActivity {
     private EditText editTextName, editTextDescription, editTextDate, editTextLocation;
     private Button buttonCreate;
     private EventDatabaseOperations eventDatabaseOperations;
+    private int eventId = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,28 +31,37 @@ public class AddEventActivity extends AppCompatActivity {
         editTextDate = findViewById(R.id.edit_text_date);
         editTextLocation = findViewById(R.id.edit_text_location);
         buttonCreate = findViewById(R.id.button_create);
-
         eventDatabaseOperations = new EventDatabaseOperations(this);
 
-        buttonCreate.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                String name = editTextName.getText().toString();
-                String description = editTextDescription.getText().toString();
-                String date = editTextDate.getText().toString();
-                String location = editTextLocation.getText().toString();
+        Intent intent = getIntent();
+        if (intent != null && intent.hasExtra("eventId")) {
+            eventId = intent.getIntExtra("eventId", -1);
+            editTextName.setText(intent.getStringExtra("eventName"));
+            editTextDescription.setText(intent.getStringExtra("eventDescription"));
+            editTextDate.setText(intent.getStringExtra("eventDate"));
+            editTextLocation.setText(intent.getStringExtra("eventLocation"));
+            buttonCreate.setText("Speichern");
+        }
 
-                if (name.isEmpty() || description.isEmpty() || date.isEmpty() || location.isEmpty()) {
-                    Toast.makeText(AddEventActivity.this, "Please fill all fields", Toast.LENGTH_SHORT).show();
-                } else {
-                    Event event = new Event(0, name, description, date, location, new ArrayList<>());
-                    eventDatabaseOperations.insertEvent(event);
-                    Toast.makeText(AddEventActivity.this, "Event created", Toast.LENGTH_SHORT).show();
-                    Intent intent = new Intent(AddEventActivity.this, EventManagementActivity.class);
-                    startActivity(intent);
-                    finish();
-                }
+        buttonCreate.setOnClickListener(v -> {
+            String name = editTextName.getText().toString();
+            String description = editTextDescription.getText().toString();
+            String date = editTextDate.getText().toString();
+            String location = editTextLocation.getText().toString();
+
+            Event event = new Event(eventId, name, description, date, location, new ArrayList<>());
+            if (eventId == -1) {
+                eventDatabaseOperations.insertEvent(event);
+            } else {
+                eventDatabaseOperations.updateEvent(event);
             }
+            updateEventList();
+            finish();
         });
+    }
+    private void updateEventList() {
+        eventList.clear();
+        eventList.addAll(eventDatabaseOperations.getAllEvents());
+        eventAdapter.notifyDataSetChanged();
     }
 }

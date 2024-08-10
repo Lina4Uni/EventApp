@@ -6,36 +6,31 @@ import android.os.Bundle;
 import android.text.SpannableString;
 import android.text.Spanned;
 import android.text.style.UnderlineSpan;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
+
 import androidx.annotation.NonNull;
-import androidx.appcompat.app.ActionBarDrawerToggle;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.drawerlayout.widget.DrawerLayout;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.example.eventplusapp.BaseActivity;
 import com.example.eventplusapp.MainActivity;
 import com.example.eventplusapp.R;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.navigation.NavigationView;
-
 import java.util.ArrayList;
 import java.util.List;
 
-public class EventManagementActivity extends AppCompatActivity {
+public class EventManagementActivity extends BaseActivity {
 
     private RecyclerView recyclerView;
-    private EventAdapter eventAdapter;
-    private List<Event> eventList;
+    public static EventAdapter eventAdapter;
+    public static List<Event> eventList;
     private EventDatabaseOperations eventDatabaseOperations;
     private FloatingActionButton fabAddEvent;
     private TextView textViewNoEvents;
-    private DrawerLayout drawer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -44,16 +39,10 @@ public class EventManagementActivity extends AppCompatActivity {
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(item -> onOptionsItemSelected(item));
+        setupNavigation(toolbar);
 
         // Inflate the header view
+        NavigationView navigationView = findViewById(R.id.nav_view);
         View headerView = navigationView.getHeaderView(0);
         if (headerView == null) {
             headerView = navigationView.inflateHeaderView(R.layout.nav_header);
@@ -124,6 +113,16 @@ public class EventManagementActivity extends AppCompatActivity {
                 Toast.makeText(EventManagementActivity.this, "Event deleted", Toast.LENGTH_SHORT).show();
             }
         }).attachToRecyclerView(recyclerView);
+
+        eventAdapter.setOnItemClickListener(event -> {
+            Intent intent = new Intent(EventManagementActivity.this, AddEventActivity.class);
+            intent.putExtra("eventId", event.getEventId());
+            intent.putExtra("eventName", event.getEventName());
+            intent.putExtra("eventDescription", event.getDescription());
+            intent.putExtra("eventDate", event.getDate());
+            intent.putExtra("eventLocation", event.getLocation());
+            startActivity(intent);
+        });
     }
 
     private void loadEvents() {
@@ -144,17 +143,5 @@ public class EventManagementActivity extends AppCompatActivity {
         SpannableString content = new SpannableString(textView.getText());
         content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         textView.setText(content);
-    }
-
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        int id = item.getItemId();
-        if (id == R.id.menu_event_home) {
-            Intent intent = new Intent(EventManagementActivity.this, MainActivity.class);
-            startActivity(intent);
-            finish();
-            return true;
-        }
-        return super.onOptionsItemSelected(item);
     }
 }

@@ -8,14 +8,13 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
 import com.example.eventplusapp.R;
-
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {
 
     private List<Event> eventList;
+    private OnItemClickListener listener;
 
     public EventAdapter(List<Event> eventList) {
         this.eventList = eventList;
@@ -24,18 +23,17 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
     @NonNull
     @Override
     public EventViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event, parent, false);
-        return new EventViewHolder(view);
+        View itemView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_event, parent, false);
+        return new EventViewHolder(itemView);
     }
 
     @Override
     public void onBindViewHolder(@NonNull EventViewHolder holder, int position) {
         Event event = eventList.get(position);
-        holder.textViewEventName.setText(event.getEventName());
-        holder.imageViewEdit.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                // Handle edit event
+        holder.textViewName.setText(event.getEventName());
+        holder.imageViewEdit.setOnClickListener(v -> {
+            if (listener != null && position != RecyclerView.NO_POSITION) {
+                listener.onItemClick(event);
             }
         });
     }
@@ -45,18 +43,21 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHol
         return eventList.size();
     }
 
-    public void updateEventList(List<Event> newEventList) {
-        this.eventList = newEventList;
-        notifyDataSetChanged();
+    public void setOnItemClickListener(OnItemClickListener listener) {
+        this.listener = listener;
     }
 
-    public static class EventViewHolder extends RecyclerView.ViewHolder {
-        TextView textViewEventName;
+    public interface OnItemClickListener {
+        void onItemClick(Event event);
+    }
+
+    class EventViewHolder extends RecyclerView.ViewHolder {
+        TextView textViewName;
         ImageView imageViewEdit;
 
         public EventViewHolder(@NonNull View itemView) {
             super(itemView);
-            textViewEventName = itemView.findViewById(R.id.text_view_event_name);
+            textViewName = itemView.findViewById(R.id.text_view_event_name);
             imageViewEdit = itemView.findViewById(R.id.image_view_edit);
         }
     }
