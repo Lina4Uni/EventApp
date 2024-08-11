@@ -10,6 +10,7 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import com.example.eventplusapp.java.User;
 import com.example.eventplusapp.java.UserDatabaseOperations;
 
 public class RegisterActivity extends AppCompatActivity {
@@ -37,8 +38,9 @@ public class RegisterActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                userDatabaseOperations.insertUser(firstName, lastName, email, password);
-                MainActivity.isLoggedIn = true;
+                User currUser = userDatabaseOperations.insertUser(firstName, lastName, email, password);
+
+                MainActivity.loggedUser = currUser;
                 Intent intent = new Intent(RegisterActivity.this, MainActivity.class);
                 intent.putExtra("firstName", firstName);
                 intent.putExtra("lastName", lastName);

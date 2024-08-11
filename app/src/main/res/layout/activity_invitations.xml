@@ -1,4 +1,4 @@
-<!-- File: res/layout/activity_event_management.xml -->
+<!-- File: res/layout/activity_invitations.xml -->
 <androidx.drawerlayout.widget.DrawerLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/drawer_layout"
@@ -19,10 +19,28 @@
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
         <!-- Hauptinhalt hier -->
-        <FrameLayout
-            android:id="@+id/content_frame"
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="match_parent" />
+            android:layout_height="match_parent"
+            android:orientation="vertical"
+            android:padding="16dp">
+
+            <!-- Spinner for events -->
+            <Spinner
+                android:id="@+id/spinner_events"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="48dp"
+                android:layout_marginBottom="16dp" />
+
+            <!-- RecyclerView for users -->
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/recycler_view_users"
+                android:layout_width="match_parent"
+                android:layout_height="0dp"
+                android:layout_weight="1" />
+
+        </LinearLayout>
 
     </LinearLayout>
 

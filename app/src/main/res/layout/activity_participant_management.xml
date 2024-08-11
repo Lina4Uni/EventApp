@@ -15,8 +15,9 @@
             android:layout_width="match_parent"
             android:layout_height="?attr/actionBarSize"
             android:background="@color/purple_200"
-            app:title="@string/participant_management"
+            app:title="Teilnehmerverwaltung"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+
 
         <!-- Hauptinhalt hier -->
         <Spinner

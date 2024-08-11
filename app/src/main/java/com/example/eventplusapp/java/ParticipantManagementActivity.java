@@ -10,11 +10,13 @@ import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+
+import com.example.eventplusapp.BaseActivity;
 import com.example.eventplusapp.R;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ParticipantManagementActivity extends AppCompatActivity {
+public class ParticipantManagementActivity extends BaseActivity {
 
     private Spinner spinnerEvents;
     private RecyclerView recyclerViewParticipants;
@@ -25,8 +27,8 @@ public class ParticipantManagementActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_participant_management);
+        super.onCreate(savedInstanceState);
 
         spinnerEvents = findViewById(R.id.spinner_events);
         recyclerViewParticipants = findViewById(R.id.recycler_view_participants);

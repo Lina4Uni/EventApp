@@ -1,8 +1,6 @@
 // File: app/src/main/java/com/example/eventplusapp/java/Event.java
 package com.example.eventplusapp.java;
 
-import android.widget.ArrayAdapter;
-
 import java.util.List;
 
 public class Event {
@@ -12,14 +10,16 @@ public class Event {
     private String date;
     private String location;
     private List<User> participants;
+    private int userId;
 
-    public Event(int eventId, String eventName, String description, String date, String location, List<User> participants) {
+    public Event(int eventId, String eventName, String description, String date, String location, List<User> participants, int userId) {
         this.eventId = eventId;
         this.eventName = eventName;
         this.description = description;
         this.date = date;
         this.location = location;
         this.participants = participants;
+        this.userId = userId;
     }
 
     public int getEventId() {
@@ -70,4 +70,7 @@ public class Event {
         return eventName;
     }
 
+    public int getUserId() {
+        return userId;
+    }
 }

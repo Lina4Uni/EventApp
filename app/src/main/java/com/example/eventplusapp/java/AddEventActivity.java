@@ -9,7 +9,11 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Toast;
+
 import androidx.appcompat.app.AppCompatActivity;
+
+import com.example.eventplusapp.MainActivity;
 import com.example.eventplusapp.R;
 
 import java.util.ArrayList;
@@ -48,15 +52,20 @@ public class AddEventActivity extends AppCompatActivity {
             String description = editTextDescription.getText().toString();
             String date = editTextDate.getText().toString();
             String location = editTextLocation.getText().toString();
-
-            Event event = new Event(eventId, name, description, date, location, new ArrayList<>());
-            if (eventId == -1) {
-                eventDatabaseOperations.insertEvent(event);
-            } else {
-                eventDatabaseOperations.updateEvent(event);
+            User currUser = MainActivity.loggedUser;
+            if (currUser != null)
+            {
+                Event event = new Event(eventId, name, description, date, location, new ArrayList<>(), MainActivity.loggedUser.getUserId());
+                if (eventId == -1) {
+                    eventDatabaseOperations.insertEvent(currUser, event);
+                } else {
+                    eventDatabaseOperations.updateEvent(event);
+                }
+                updateEventList();
+                finish();
             }
-            updateEventList();
-            finish();
+            else
+                Toast.makeText(AddEventActivity.this, "Funktion nur bei Anmeldung verfügbar", Toast.LENGTH_SHORT).show();
         });
     }
     private void updateEventList() {

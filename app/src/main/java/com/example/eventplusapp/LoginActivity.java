@@ -35,7 +35,7 @@ public class LoginActivity extends AppCompatActivity {
 
                 User currUser = userDatabaseOperations.checkUser(email, password);
                 if (currUser != null) {
-                    MainActivity.isLoggedIn = true;
+                    MainActivity.loggedUser = currUser;
                     String firstName = currUser.getVorname();
                     String lastName = currUser.getNachname();
                     Intent intent = new Intent(LoginActivity.this, MainActivity.class);

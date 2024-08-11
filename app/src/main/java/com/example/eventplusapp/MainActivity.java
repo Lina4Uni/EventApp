@@ -18,83 +18,23 @@ import com.example.eventplusapp.java.InvitationsActivity;
 import com.example.eventplusapp.java.ParticipantManagementActivity;
 import com.example.eventplusapp.java.RemindersActivity;
 import com.example.eventplusapp.java.ScheduleCreationActivity;
+import com.example.eventplusapp.java.User;
 import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends BaseActivity {
 
-    public static boolean isLoggedIn = false;
-    public static String firstName = "";
-    public static String lastName = "";
+    public static User loggedUser;
     private DatabaseHelper dbHelper;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.main_activity);
+        super.onCreate(savedInstanceState);
 
         // Initialize DatabaseHelper
         dbHelper = new DatabaseHelper(this);
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         Log.d("MainActivity", "Database created/opened");
-
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setupNavigation(toolbar);
-
-        // Inflate the header view
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-        if (headerView == null) {
-            headerView = navigationView.inflateHeaderView(R.layout.nav_header);
-        }
-        TextView headerText = headerView.findViewById(R.id.header_text);
-        TextView loginText = headerView.findViewById(R.id.login_text);
-        TextView registerText = headerView.findViewById(R.id.register_text);
-        TextView logoutText = headerView.findViewById(R.id.logout_text);
-
-        // Underline the text programmatically
-        underlineTextView(loginText);
-        underlineTextView(registerText);
-        underlineTextView(logoutText);
-
-        loginText.setOnClickListener(v ->  {
-            Intent intent = new Intent(MainActivity.this, LoginActivity.class);
-            startActivity(intent);
-        });
-
-        registerText.setOnClickListener(v -> {
-            Intent intent = new Intent(MainActivity.this, RegisterActivity.class);
-            startActivity(intent);
-        });
-
-        if (isLoggedIn) {
-            Intent intent = getIntent();
-            firstName = intent.getStringExtra("firstName");
-            lastName = intent.getStringExtra("lastName");
-
-            headerText.setText("Hallo " + firstName + " " + lastName);
-            loginText.setVisibility(View.GONE);
-            registerText.setVisibility(View.GONE);
-            logoutText.setVisibility(View.VISIBLE);
-        } else {
-            headerText.setText("Kein Profil");
-            logoutText.setVisibility(View.GONE);
-        }
-
-        logoutText.setOnClickListener(v -> {
-            // Handle logout action
-            isLoggedIn = false;
-            headerText.setText("Kein Profil");
-            loginText.setVisibility(View.VISIBLE);
-            registerText.setVisibility(View.VISIBLE);
-            logoutText.setVisibility(View.GONE);
-        });
-    }
-
-    private void underlineTextView(TextView textView) {
-        SpannableString content = new SpannableString(textView.getText());
-        content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.setText(content);
     }
 
     public void onTileClick(View view) {

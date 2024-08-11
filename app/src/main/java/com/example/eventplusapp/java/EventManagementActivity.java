@@ -34,64 +34,19 @@ public class EventManagementActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_event_management);
+        super.onCreate(savedInstanceState);
 
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setupNavigation(toolbar);
-
-        // Inflate the header view
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        View headerView = navigationView.getHeaderView(0);
-        if (headerView == null) {
-            headerView = navigationView.inflateHeaderView(R.layout.nav_header);
-        }
-        TextView headerText = headerView.findViewById(R.id.header_text);
-        TextView loginText = headerView.findViewById(R.id.login_text);
-        TextView registerText = headerView.findViewById(R.id.register_text);
-        TextView logoutText = headerView.findViewById(R.id.logout_text);
-
-        // Underline the text programmatically
-        underlineTextView(loginText);
-        underlineTextView(registerText);
-        underlineTextView(logoutText);
-
-        loginText.setOnClickListener(v -> setContentView(R.layout.activity_login));
-        registerText.setOnClickListener(v -> setContentView(R.layout.activity_register));
-
-        if (MainActivity.isLoggedIn) {
-            headerText.setText("Hallo " + MainActivity.firstName + " " + MainActivity.lastName);
-            loginText.setVisibility(View.GONE);
-            registerText.setVisibility(View.GONE);
-            logoutText.setVisibility(View.VISIBLE);
-        } else {
-            headerText.setText("Kein Profil");
-            logoutText.setVisibility(View.GONE);
-        }
-
-        logoutText.setOnClickListener(v -> {
-            // Handle logout action
-            MainActivity.isLoggedIn = false;
-            headerText.setText("Kein Profil");
-            loginText.setVisibility(View.VISIBLE);
-            registerText.setVisibility(View.VISIBLE);
-            logoutText.setVisibility(View.GONE);
-        });
 
         recyclerView = findViewById(R.id.recycler_view_events);
         fabAddEvent = findViewById(R.id.fab_add_event);
         textViewNoEvents = findViewById(R.id.text_view_no_events);
-
         eventDatabaseOperations = new EventDatabaseOperations(this);
         eventList = new ArrayList<>();
         eventAdapter = new EventAdapter(eventList);
-
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(eventAdapter);
-
         loadEvents();
-
         fabAddEvent.setOnClickListener(v -> {
             Intent intent = new Intent(EventManagementActivity.this, AddEventActivity.class);
             startActivity(intent);
@@ -137,11 +92,5 @@ public class EventManagementActivity extends BaseActivity {
             textViewNoEvents.setVisibility(View.GONE);
             recyclerView.setVisibility(View.VISIBLE);
         }
-    }
-
-    private void underlineTextView(TextView textView) {
-        SpannableString content = new SpannableString(textView.getText());
-        content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
-        textView.setText(content);
     }
 }

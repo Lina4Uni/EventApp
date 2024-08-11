@@ -16,6 +16,9 @@
         <activity android:name="com.example.eventplusapp.java.EventManagementActivity" />
         <activity android:name="com.example.eventplusapp.java.AddEventActivity" />
         <activity android:name="com.example.eventplusapp.java.ParticipantManagementActivity" />
+        <activity android:name="com.example.eventplusapp.java.ScheduleCreationActivity" />
+        <activity android:name="com.example.eventplusapp.java.InvitationsActivity" />
+        <activity android:name="com.example.eventplusapp.java.RemindersActivity" />
         <activity android:name=".MainActivity"
             android:exported="true">
             <intent-filter>

@@ -3,7 +3,13 @@ package com.example.eventplusapp;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.SpannableString;
+import android.text.Spanned;
+import android.text.style.UnderlineSpan;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.TextView;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
@@ -23,10 +29,56 @@ public abstract class BaseActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        drawer = findViewById(R.id.drawer_layout); // Initialize the drawer here
+        setupNavigation(toolbar);
+
+        // Inflate the header view
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        View headerView = navigationView.getHeaderView(0);
+        if (headerView == null) {
+            headerView = navigationView.inflateHeaderView(R.layout.nav_header);
+        }
+        TextView headerText = headerView.findViewById(R.id.header_text);
+        TextView loginText = headerView.findViewById(R.id.login_text);
+        TextView registerText = headerView.findViewById(R.id.register_text);
+        TextView logoutText = headerView.findViewById(R.id.logout_text);
+        // Underline the text programmatically
+        underlineTextView(loginText);
+        underlineTextView(registerText);
+        underlineTextView(logoutText);
+        loginText.setOnClickListener(v -> {
+            Intent intent = new Intent(BaseActivity.this, LoginActivity.class);
+            startActivity(intent);
+        });
+
+        registerText.setOnClickListener(v -> {
+            Intent intent = new Intent(BaseActivity.this, RegisterActivity.class);
+            startActivity(intent);
+        });
+        if (MainActivity.loggedUser != null) {
+            headerText.setText("Hallo " + MainActivity.loggedUser.getVorname() + " " + MainActivity.loggedUser.getNachname());
+            loginText.setVisibility(View.GONE);
+            registerText.setVisibility(View.GONE);
+            logoutText.setVisibility(View.VISIBLE);
+        } else {
+            headerText.setText("Kein Profil");
+            logoutText.setVisibility(View.GONE);
+        }
+        logoutText.setOnClickListener(v -> {
+            // Handle logout action
+            MainActivity.loggedUser = null;
+            headerText.setText("Kein Profil");
+            loginText.setVisibility(View.VISIBLE);
+            registerText.setVisibility(View.VISIBLE);
+            logoutText.setVisibility(View.GONE);
+        });
     }
 
     protected void setupNavigation(Toolbar toolbar) {
-        drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
@@ -63,6 +115,12 @@ public abstract class BaseActivity extends AppCompatActivity {
             return true;
         }
         return false;
+    }
+
+    public static void underlineTextView(TextView textView) {
+        SpannableString content = new SpannableString(textView.getText());
+        content.setSpan(new UnderlineSpan(), 0, content.length(), Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        textView.setText(content);
     }
 
     @Override
