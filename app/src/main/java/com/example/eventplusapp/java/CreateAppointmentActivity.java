@@ -1,6 +1,7 @@
 // File: app/src/main/java/com/example/eventplusapp/java/CreateAppointmentActivity.java
 package com.example.eventplusapp.java;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -37,10 +38,25 @@ public class CreateAppointmentActivity extends AppCompatActivity {
                 if (description.isEmpty() || date.isEmpty() || time.isEmpty()) {
                     Toast.makeText(CreateAppointmentActivity.this, "Bitte alle Felder ausfüllen", Toast.LENGTH_SHORT).show();
                 } else {
+                    // Get the selected event ID from the intent
+                    Intent intent = getIntent();
+                    int selectedEventId = intent.getIntExtra("selectedEventId", -1);
+
+                    if (selectedEventId == -1) {
+                        Toast.makeText(CreateAppointmentActivity.this, "Kein Event ausgewählt", Toast.LENGTH_SHORT).show();
+                        return;
+                    }
+
                     // Save the appointment details to the database
-                    // For now, just show a toast
+                    EventDatabaseOperations dbOperations = new EventDatabaseOperations(CreateAppointmentActivity.this);
+                    Appointment newAppointment = new Appointment(0, date, time, description, selectedEventId);
+                    dbOperations.insertAppointment(newAppointment);
+
                     Toast.makeText(CreateAppointmentActivity.this, "Termin erstellt: " + description, Toast.LENGTH_SHORT).show();
-                    finish(); // Close the activity
+
+                    // Navigate back to AppointmentActivity
+                    intent = new Intent(CreateAppointmentActivity.this, AppointmentActivity.class);
+                    startActivity(intent);finish(); // Close the activity
                 }
             }
         });

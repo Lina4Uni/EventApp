@@ -205,18 +205,32 @@ public class EventDatabaseOperations {
     }
 
     // File: app/src/main/java/com/example/eventplusapp/java/EventDatabaseOperations.java
-    public List<String> getEventsByUserId(int userId) {
-        List<String> eventList = new ArrayList<>();
+    public List<Event> getEventsByUserId(int userId) {
+        List<Event> eventList = new ArrayList<>();
         SQLiteDatabase db = dbHelper.getReadableDatabase();
 
-        String query = "SELECT " + DatabaseContract.EventEntry.COLUMN_EVENT_NAME +
+        String query = "SELECT " +
+                DatabaseContract.EventEntry.COLUMN_EVENT_ID + ", " +
+                DatabaseContract.EventEntry.COLUMN_EVENT_NAME + ", " +
+                DatabaseContract.EventEntry.COLUMN_DESCRIPTION + ", " +
+                DatabaseContract.EventEntry.COLUMN_DATE + ", " +
+                DatabaseContract.EventEntry.COLUMN_LOCATION + ", " +
+                DatabaseContract.EventEntry.COLUMN_USER_ID +
                 " FROM " + DatabaseContract.EventEntry.TABLE_NAME +
                 " WHERE " + DatabaseContract.EventEntry.COLUMN_USER_ID + " = ?";
         Cursor cursor = db.rawQuery(query, new String[]{String.valueOf(userId)});
 
         if (cursor.moveToFirst()) {
             do {
-                eventList.add(cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_EVENT_NAME)));
+                int eventId = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_EVENT_ID));
+                String eventName = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_EVENT_NAME));
+                String description = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_DESCRIPTION));
+                String date = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_DATE));
+                String location = cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_LOCATION));
+                int userIdFromDb = cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_USER_ID));
+
+                Event event = new Event(eventId, eventName, description, date, location, new ArrayList<>(), userIdFromDb);
+                eventList.add(event);
             } while (cursor.moveToNext());
         }
         cursor.close();
@@ -380,5 +394,40 @@ public class EventDatabaseOperations {
 
         db.insert(DatabaseContract.AppointmentEntry.TABLE_NAME, null, values);
         db.close();
+    }
+
+    public List<Appointment> getAppointmentsByEventId(int eventId) {
+        List<Appointment> appointments = new ArrayList<>();
+        SQLiteDatabase db = dbHelper.getWritableDatabase();
+
+        Cursor cursor = db.query(DatabaseContract.AppointmentEntry.TABLE_NAME,
+                new String[]{
+                        DatabaseContract.AppointmentEntry.COLUMN_ID,
+                        DatabaseContract.AppointmentEntry.COLUMN_DATE,
+                        DatabaseContract.AppointmentEntry.COLUMN_TIME,
+                        DatabaseContract.AppointmentEntry.COLUMN_DESCRIPTION,
+                        DatabaseContract.EventEntry.COLUMN_EVENT_ID
+                },
+                DatabaseContract.EventEntry.COLUMN_EVENT_ID + "=?",
+                new String[]{String.valueOf(eventId)},
+                null, null, null, null);
+
+        if (cursor != null) {
+            if (cursor.moveToFirst()) {
+                do {
+                    Appointment appointment = new Appointment(
+                            cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.AppointmentEntry.COLUMN_ID)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.AppointmentEntry.COLUMN_DATE)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.AppointmentEntry.COLUMN_TIME)),
+                            cursor.getString(cursor.getColumnIndexOrThrow(DatabaseContract.AppointmentEntry.COLUMN_DESCRIPTION)),
+                            cursor.getInt(cursor.getColumnIndexOrThrow(DatabaseContract.EventEntry.COLUMN_EVENT_ID))
+                    );
+                    appointments.add(appointment);
+                } while (cursor.moveToNext());
+            }
+            cursor.close();
+        }
+
+        return appointments;
     }
 }
