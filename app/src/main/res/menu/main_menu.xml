@@ -17,7 +17,7 @@
         android:iconTint="@color/purple_200"/>
     <item
         android:id="@+id/menu_schedule_creation"
-        android:icon="@drawable/ic_schedule_creation"
+        android:icon="@drawable/ic_appointment_creation"
         android:title="@string/schedule_creation"
         android:iconTint="@color/purple_200"/>
     <item

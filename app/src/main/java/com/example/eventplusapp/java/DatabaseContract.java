@@ -32,4 +32,21 @@ public final class DatabaseContract {
         public static final String COLUMN_USER_ID = "User_Id"; // Foreign key
         public static final String COLUMN_STATUS = "Status";
     }
+
+    public static class ReminderEntry implements BaseColumns {
+        public static final String TABLE_NAME = "Reminder";
+        public static final String COLUMN_ID = "Reminder_Id";
+        public static final String COLUMN_MESSAGE = "Message";
+        public static final String COLUMN_RequestedUser_Id = "RequestedUser_Id";
+        public static final String COLUMN_TYPE = "Type";
+        public static final String COLUMN_EVENT_ID = "Event_Id"; // Foreign key
+    }
+
+    public static class AppointmentEntry implements BaseColumns {
+        public static final String TABLE_NAME = "Appointment";
+        public static final String COLUMN_ID = "Appointment_Id";
+        public static final String COLUMN_DESCRIPTION = "Description";
+        public static final String COLUMN_DATE = "Date";
+        public static final String COLUMN_TIME = "Time";
+    }
 }

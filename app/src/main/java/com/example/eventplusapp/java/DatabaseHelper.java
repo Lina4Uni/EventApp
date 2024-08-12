@@ -42,9 +42,29 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 "FOREIGN KEY(" + DatabaseContract.EventUserEntry.COLUMN_USER_ID + ") REFERENCES " +
                 DatabaseContract.UserEntry.TABLE_NAME + "(" + DatabaseContract.UserEntry.COLUMN_USER_ID + "));";
 
+        String SQL_CREATE_REMINDER_TABLE = "CREATE TABLE " + DatabaseContract.ReminderEntry.TABLE_NAME + " (" +
+                DatabaseContract.ReminderEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseContract.ReminderEntry.COLUMN_MESSAGE + " TEXT NOT NULL, " +
+                DatabaseContract.ReminderEntry.COLUMN_RequestedUser_Id + " INTEGER NOT NULL, " +
+                DatabaseContract.ReminderEntry.COLUMN_TYPE + " TEXT NOT NULL, " +
+                DatabaseContract.ReminderEntry.COLUMN_EVENT_ID + " INTEGER NOT NULL, " +
+                "FOREIGN KEY(" + DatabaseContract.ReminderEntry.COLUMN_EVENT_ID + ") REFERENCES " +
+                DatabaseContract.EventEntry.TABLE_NAME + "(" + DatabaseContract.EventEntry._ID + "));";
+
+        String SQL_CREATE_APPOINTMENT_TABLE = "CREATE TABLE " + DatabaseContract.AppointmentEntry.TABLE_NAME + " (" +
+                DatabaseContract.AppointmentEntry.COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                DatabaseContract.AppointmentEntry.COLUMN_DESCRIPTION + " TEXT NOT NULL, " +
+                DatabaseContract.AppointmentEntry.COLUMN_DATE + " TEXT NOT NULL, " +
+                DatabaseContract.AppointmentEntry.COLUMN_TIME + " TEXT NOT NULL, " +
+                DatabaseContract.ReminderEntry.COLUMN_EVENT_ID + " INTEGER, " +
+                "FOREIGN KEY(" + DatabaseContract.ReminderEntry.COLUMN_EVENT_ID + ") REFERENCES " +
+                DatabaseContract.EventEntry.TABLE_NAME + "(" + DatabaseContract.EventEntry.COLUMN_EVENT_ID + "));";
+
+        db.execSQL(SQL_CREATE_REMINDER_TABLE);
         db.execSQL(SQL_CREATE_USER_TABLE);
         db.execSQL(SQL_CREATE_EVENT_TABLE);
         db.execSQL(SQL_CREATE_EVENT_USER_TABLE);
+        db.execSQL(SQL_CREATE_APPOINTMENT_TABLE);
     }
 
     @Override
@@ -52,6 +72,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.UserEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.EventEntry.TABLE_NAME);
         db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.EventUserEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.ReminderEntry.TABLE_NAME);
+        db.execSQL("DROP TABLE IF EXISTS " + DatabaseContract.AppointmentEntry.TABLE_NAME);
         onCreate(db);
     }
 }

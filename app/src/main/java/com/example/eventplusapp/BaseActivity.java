@@ -10,7 +10,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
@@ -19,7 +18,7 @@ import com.example.eventplusapp.java.EventManagementActivity;
 import com.example.eventplusapp.java.InvitationsActivity;
 import com.example.eventplusapp.java.ParticipantManagementActivity;
 import com.example.eventplusapp.java.RemindersActivity;
-import com.example.eventplusapp.java.ScheduleCreationActivity;
+import com.example.eventplusapp.java.AppointmentActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public abstract class BaseActivity extends AppCompatActivity {
@@ -102,7 +101,7 @@ public abstract class BaseActivity extends AppCompatActivity {
             finish();
             return true;
         } else if (id == R.id.menu_schedule_creation) {
-            startActivity(new Intent(this, ScheduleCreationActivity.class));
+            startActivity(new Intent(this, AppointmentActivity.class));
             finish();
             return true;
         } else if (id == R.id.menu_invitations) {

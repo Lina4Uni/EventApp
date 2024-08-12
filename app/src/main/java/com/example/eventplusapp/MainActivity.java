@@ -4,22 +4,16 @@ package com.example.eventplusapp;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.UnderlineSpan;
 import android.util.Log;
 import android.view.View;
-import android.widget.TextView;
-import androidx.appcompat.widget.Toolbar;
 
 import com.example.eventplusapp.java.DatabaseHelper;
 import com.example.eventplusapp.java.EventManagementActivity;
 import com.example.eventplusapp.java.InvitationsActivity;
 import com.example.eventplusapp.java.ParticipantManagementActivity;
 import com.example.eventplusapp.java.RemindersActivity;
-import com.example.eventplusapp.java.ScheduleCreationActivity;
+import com.example.eventplusapp.java.AppointmentActivity;
 import com.example.eventplusapp.java.User;
-import com.google.android.material.navigation.NavigationView;
 
 public class MainActivity extends BaseActivity {
 
@@ -51,7 +45,7 @@ public class MainActivity extends BaseActivity {
                 startActivity(intent);
                 break;
             case "menu_schedule_creation":
-                intent = new Intent(MainActivity.this, ScheduleCreationActivity.class);
+                intent = new Intent(MainActivity.this, AppointmentActivity.class);
                 startActivity(intent);
                 break;
             case "menu_invitations":

@@ -24,6 +24,7 @@ public class InvitationsActivity extends BaseActivity {
     private UserStatusAdapter adapter;
     private List<UserStatus> userStatusList;
     private List<String> userEvents;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         setContentView(R.layout.activity_invitations);
@@ -56,11 +57,15 @@ public class InvitationsActivity extends BaseActivity {
                     if (direction == ItemTouchHelper.RIGHT) {
                         userStatus.setStatus("ADD");
                         updateStatusInDatabase(userStatus.getUserId(), selectedEventId, Status.ADD.toString());
+                        dbOperations.deleteReminder(userStatus.getUserId(), selectedEventId);
+                        Toast.makeText(InvitationsActivity.this, "Nutzer nimmt nicht mehr am Event teil.", Toast.LENGTH_SHORT).show();
                     } else if (direction == ItemTouchHelper.LEFT) {
                         switch (userStatus.getStatus()) {
                             case "ADD":
                                 userStatus.setStatus("PENDING");
                                 updateStatusInDatabase(userStatus.getUserId(), selectedEventId, Status.PENDING.toString());
+                                dbOperations.insertReminder("Einladung zu einem Event erhalten", userStatus.getUserId(), "EventRequest", selectedEventId);
+                                Toast.makeText(InvitationsActivity.this, "Benutzer wird angefragt", Toast.LENGTH_SHORT).show();
                                 break;
                             case "PENDING":
                                 Toast.makeText(InvitationsActivity.this, "bereits angefragt", Toast.LENGTH_SHORT).show();
@@ -78,31 +83,6 @@ public class InvitationsActivity extends BaseActivity {
             }
         });
         itemTouchHelper.attachToRecyclerView(userRecyclerView);
-
-        ItemTouchHelper itemTouchHelperRight = new ItemTouchHelper(new ItemTouchHelper.SimpleCallback(0, ItemTouchHelper.RIGHT) {
-            @Override
-            public boolean onMove(RecyclerView recyclerView, RecyclerView.ViewHolder viewHolder, RecyclerView.ViewHolder target) {
-                return false;
-            }
-
-            @Override
-            public void onSwiped(RecyclerView.ViewHolder viewHolder, int direction) {
-                int position = viewHolder.getAdapterPosition();
-                UserStatus userStatus = userStatusList.get(position);
-
-                if (userStatus.getUserId() == MainActivity.loggedUser.getUserId()) {
-                    Toast.makeText(InvitationsActivity.this, "You cannot change your own status", Toast.LENGTH_SHORT).show();
-                    adapter.notifyItemChanged(position);
-                } else {
-                    userStatus.setStatus("ADD");
-                    EventDatabaseOperations dbOperations = new EventDatabaseOperations(InvitationsActivity.this);
-                    int selectedEventId = dbOperations.getEventIdByName((String) eventSpinner.getSelectedItem());
-                    updateStatusInDatabase(userStatus.getUserId(), selectedEventId, "ADD");
-                    adapter.notifyItemChanged(position);
-                }
-            }
-        });
-        itemTouchHelperRight.attachToRecyclerView(userRecyclerView);
     }
 
     private void loadUserEvents() {
@@ -146,6 +126,6 @@ public class InvitationsActivity extends BaseActivity {
 
     private void updateStatusInDatabase(int userId, int eventId, String status) {
         EventDatabaseOperations dbOperations = new EventDatabaseOperations(this);
-        dbOperations.updateUserStatus(userId, eventId, Status.ADD);
+        dbOperations.updateUserStatus(userId, eventId, Status.valueOf(status));
     }
 }

@@ -62,7 +62,7 @@ public class ParticipantManagementActivity extends BaseActivity {
 
     private void loadParticipants(int eventId) {
         participantList.clear();
-        //participantList.addAll(eventDatabaseOperations.getParticipantsForEvent(eventId));
-        //participantAdapter.notifyDataSetChanged();
+        participantList.addAll(eventDatabaseOperations.getParticipantsForEvent(eventId));
+        participantAdapter.notifyDataSetChanged();
     }
 }

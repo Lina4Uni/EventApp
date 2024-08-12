@@ -73,4 +73,8 @@ public class Event {
     public int getUserId() {
         return userId;
     }
+
+    public int getId() {
+        return eventId;
+    }
 }
