@@ -7,13 +7,13 @@ import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 
-import com.example.eventplusapp.java.DatabaseHelper;
-import com.example.eventplusapp.java.EventManagementActivity;
-import com.example.eventplusapp.java.InvitationsActivity;
-import com.example.eventplusapp.java.ParticipantManagementActivity;
-import com.example.eventplusapp.java.RemindersActivity;
-import com.example.eventplusapp.java.AppointmentActivity;
-import com.example.eventplusapp.java.User;
+import com.example.eventplusapp.db.DatabaseHelper;
+import com.example.eventplusapp.eventmanagement.EventManagementActivity;
+import com.example.eventplusapp.invitations.InvitationsActivity;
+import com.example.eventplusapp.participant.ParticipantManagementActivity;
+import com.example.eventplusapp.reminder.RemindersActivity;
+import com.example.eventplusapp.appointment.AppointmentActivity;
+import com.example.eventplusapp.user.User;
 
 public class MainActivity extends BaseActivity {
 

@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/InvitationsActivity.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.invitations;
 
 import android.os.Bundle;
 import android.view.View;
@@ -15,6 +15,10 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplusapp.BaseActivity;
 import com.example.eventplusapp.MainActivity;
 import com.example.eventplusapp.R;
+import com.example.eventplusapp.db.EventDatabaseOperations;
+import com.example.eventplusapp.user.User;
+import com.example.eventplusapp.user.UserStatus;
+import com.example.eventplusapp.user.UserStatusAdapter;
 
 import java.util.List;
 

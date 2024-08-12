@@ -1,18 +1,20 @@
 // File: app/src/main/java/com/example/eventplusapp/java/ParticipantManagementActivity.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.participant;
 
 import android.os.Bundle;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Spinner;
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
+
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplusapp.BaseActivity;
 import com.example.eventplusapp.R;
+import com.example.eventplusapp.db.EventDatabaseOperations;
+import com.example.eventplusapp.eventmanagement.Event;
+
 import java.util.ArrayList;
 import java.util.List;
 

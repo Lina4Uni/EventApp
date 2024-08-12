@@ -1,13 +1,20 @@
 // File: app/src/main/java/com/example/eventplusapp/java/EventDatabaseOperations.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.db;
 
 import android.content.ContentValues;
 import android.content.Context;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
+import com.example.eventplusapp.appointment.Appointment;
+import com.example.eventplusapp.eventmanagement.Event;
+import com.example.eventplusapp.participant.Participant;
+import com.example.eventplusapp.reminder.Reminder;
+import com.example.eventplusapp.invitations.Status;
+import com.example.eventplusapp.user.User;
+import com.example.eventplusapp.user.UserStatus;
+
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 
 public class EventDatabaseOperations {

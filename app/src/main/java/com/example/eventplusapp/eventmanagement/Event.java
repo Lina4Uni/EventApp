@@ -1,5 +1,7 @@
 // File: app/src/main/java/com/example/eventplusapp/java/Event.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.eventmanagement;
+
+import com.example.eventplusapp.user.User;
 
 import java.util.List;
 

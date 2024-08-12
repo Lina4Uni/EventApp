@@ -1,25 +1,21 @@
 // File: app/src/main/java/com/example/eventplusapp/java/EventManagementActivity.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.eventmanagement;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.text.SpannableString;
-import android.text.Spanned;
-import android.text.style.UnderlineSpan;
 import android.view.View;
 import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
-import androidx.appcompat.widget.Toolbar;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplusapp.BaseActivity;
-import com.example.eventplusapp.MainActivity;
 import com.example.eventplusapp.R;
+import com.example.eventplusapp.db.EventDatabaseOperations;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
-import com.google.android.material.navigation.NavigationView;
+
 import java.util.ArrayList;
 import java.util.List;
 

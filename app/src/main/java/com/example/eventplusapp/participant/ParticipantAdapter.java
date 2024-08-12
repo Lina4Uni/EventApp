@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/ParticipantAdapter.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.participant;
 
 import android.view.LayoutInflater;
 import android.view.View;

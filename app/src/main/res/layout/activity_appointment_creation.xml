@@ -5,7 +5,7 @@
     android:id="@+id/drawer_layout"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".java.AppointmentActivity">
+    tools:context=".appointment.AppointmentActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,6 +19,15 @@
             android:background="@color/purple_200"
             app:title="Terminerstellung"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
+        <TextView
+            android:id="@+id/text_list_persons"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Events:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="16dp" />
 
         <Spinner
             android:id="@+id/spinner_events"

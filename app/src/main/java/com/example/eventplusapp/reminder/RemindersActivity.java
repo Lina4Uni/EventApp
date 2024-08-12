@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/RemindersActivity.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.reminder;
 
 import android.os.Bundle;
 import android.widget.Toast;
@@ -9,6 +9,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplusapp.BaseActivity;
 import com.example.eventplusapp.MainActivity;
 import com.example.eventplusapp.R;
+import com.example.eventplusapp.db.EventDatabaseOperations;
+
 import java.util.List;
 
 public class RemindersActivity extends BaseActivity {

@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/EventAdapter.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.eventmanagement;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -9,6 +9,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 import com.example.eventplusapp.R;
+
 import java.util.List;
 
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.EventViewHolder> {

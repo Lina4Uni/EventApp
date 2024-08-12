@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/DatabaseContract.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.db;
 
 import android.provider.BaseColumns;
 

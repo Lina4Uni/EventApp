@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/UserStatus.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.user;
 
 public class UserStatus {
     private String email;

@@ -18,6 +18,15 @@
             app:title="Teilnehmerverwaltung"
             app:popupTheme="@style/ThemeOverlay.AppCompat.Light" />
 
+        <TextView
+            android:id="@+id/text_view_participant_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Events:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
+            android:padding="16dp" />
         <!-- Hauptinhalt hier -->
         <Spinner
             android:id="@+id/spinner_events"
@@ -26,11 +35,13 @@
             android:layout_marginBottom="16dp" />
 
         <TextView
-            android:id="@+id/text_view_participant_header"
+            android:id="@+id/text_view_events_text"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Teilnehmer des Events"
-            android:textSize="18sp"
+            android:text="Teilnehmer des Events:"
+            android:textSize="24sp"
+            android:textStyle="bold"
+            android:textColor="@color/black"
             android:padding="16dp" />
 
         <androidx.recyclerview.widget.RecyclerView

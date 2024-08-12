@@ -9,8 +9,12 @@ import android.widget.EditText;
 import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
-import com.example.eventplusapp.java.User;
-import com.example.eventplusapp.java.UserDatabaseOperations;
+import com.example.eventplusapp.user.User;
+import com.example.eventplusapp.user.UserDatabaseOperations;
+
+import java.nio.charset.StandardCharsets;
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -33,7 +37,16 @@ public class LoginActivity extends AppCompatActivity {
                 String email = emailEditText.getText().toString();
                 String password = passwordEditText.getText().toString();
 
-                User currUser = userDatabaseOperations.checkUser(email, password);
+
+                MessageDigest digest = null;
+                try {
+                    digest = MessageDigest.getInstance("SHA-256");
+                } catch (NoSuchAlgorithmException e) {
+                    throw new RuntimeException(e);
+                }
+                byte[] hash = digest.digest(password.getBytes(StandardCharsets.UTF_8));
+
+                User currUser = userDatabaseOperations.checkUser(email, new String(hash, StandardCharsets.UTF_8));
                 if (currUser != null) {
                     MainActivity.loggedUser = currUser;
                     String firstName = currUser.getVorname();

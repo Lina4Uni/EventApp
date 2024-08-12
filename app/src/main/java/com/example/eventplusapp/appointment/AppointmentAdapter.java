@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/AppointmentAdapter.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.appointment;
 
 import android.view.LayoutInflater;
 import android.view.View;

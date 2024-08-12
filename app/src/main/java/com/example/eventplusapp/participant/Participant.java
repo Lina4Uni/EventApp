@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/Participant.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.participant;
 
 public class Participant {
     private String lastName;

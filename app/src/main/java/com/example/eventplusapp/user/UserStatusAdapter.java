@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/UserStatusAdapter.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.user;
 
 import android.view.LayoutInflater;
 import android.view.View;

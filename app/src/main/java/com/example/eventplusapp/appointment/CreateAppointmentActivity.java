@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/CreateAppointmentActivity.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.appointment;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,6 +10,7 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.eventplusapp.R;
+import com.example.eventplusapp.db.EventDatabaseOperations;
 
 public class CreateAppointmentActivity extends AppCompatActivity {
 

@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/Appointment.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.appointment;
 
 public class Appointment {
     private int id;

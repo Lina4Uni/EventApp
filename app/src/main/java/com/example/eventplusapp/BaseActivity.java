@@ -14,11 +14,11 @@ import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.drawerlayout.widget.DrawerLayout;
-import com.example.eventplusapp.java.EventManagementActivity;
-import com.example.eventplusapp.java.InvitationsActivity;
-import com.example.eventplusapp.java.ParticipantManagementActivity;
-import com.example.eventplusapp.java.RemindersActivity;
-import com.example.eventplusapp.java.AppointmentActivity;
+import com.example.eventplusapp.eventmanagement.EventManagementActivity;
+import com.example.eventplusapp.invitations.InvitationsActivity;
+import com.example.eventplusapp.participant.ParticipantManagementActivity;
+import com.example.eventplusapp.reminder.RemindersActivity;
+import com.example.eventplusapp.appointment.AppointmentActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public abstract class BaseActivity extends AppCompatActivity {

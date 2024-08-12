@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/Reminder.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.reminder;
 
 public class Reminder {
     private int id;

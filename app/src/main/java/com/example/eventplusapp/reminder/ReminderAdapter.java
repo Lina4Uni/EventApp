@@ -1,5 +1,5 @@
 // File: app/src/main/java/com/example/eventplusapp/java/ReminderAdapter.java
-package com.example.eventplusapp.java;
+package com.example.eventplusapp.reminder;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -12,6 +12,8 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.eventplusapp.R;
+import com.example.eventplusapp.db.EventDatabaseOperations;
+import com.example.eventplusapp.invitations.Status;
 
 import java.util.List;
 
